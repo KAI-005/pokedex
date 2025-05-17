@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PokéDex Explorer</title>
+    <style>
+        body { font-family: sans-serif; padding: 2em; }
+        .card { border: 1px solid #ccc; padding: 1em; border-radius: 8px; max-width: 400px; }
+    </style>
+</head>
+<body>
+    <h1>PokéDex Explorer</h1>
+    <form method="get">
+        <input type="text" name="pokemon" placeholder="Enter Pokémon name or ID" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if pokemon %}
+        {% if pokemon.error %}
+            <p style="color:red;">{{ pokemon.error }}</p>
+        {% else %}
+            <div class="card">
+                <h2>{{ pokemon.name }}</h2>
+                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
+                <p><strong>Type:</strong> {{ pokemon.types|join:", " }}</p>
+                <p><strong>Abilities:</strong> {{ pokemon.abilities|join:", " }}</p>
+                <h4>Stats:</h4>
+                <ul>
+                    {% for stat, value in pokemon.stats.items %}
+                        <li><strong>{{ stat }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
