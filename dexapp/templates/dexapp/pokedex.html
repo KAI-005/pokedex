@@ -1,37 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PokéDex Explorer</title>
-    <style>
-        body { font-family: sans-serif; padding: 2em; }
-        .card { border: 1px solid #ccc; padding: 1em; border-radius: 8px; max-width: 400px; }
-    </style>
-</head>
-<body>
-    <h1>PokéDex Explorer</h1>
-    <form method="get">
-        <input type="text" name="pokemon" placeholder="Enter Pokémon name or ID" required>
-        <button type="submit">Search</button>
-    </form>
+<div style="width: 400px; height: 600px; position: relative; background: white; overflow: hidden; border-radius: 12px">
+  <div style="width: 400px; height: 600px; left: 0px; top: 0px; position: absolute; background: #E53935; border-radius: 16px"></div>
+  <div style="width: 300px; height: 325px; left: 50px; top: 20px; position: absolute; background: #1E1E1E; border-radius: 8px; border: 1px white solid"></div>
+  
+  {% if pokemon.name %}
+    <img
+      src="{{ pokemon.image }}"
+      alt="{{ pokemon.name }}"
+      style="width: 120px; height: 120px; left: 72px; top: 39px; position: absolute; border-radius: 8px; border: 1px white solid; object-fit: contain;"
+    />
+  
+    <div style="left: 74px; top: 168px; position: absolute; color: white; font-size: 12px; font-family: Courier Prime; font-weight: 400; word-wrap: break-word; width: 260px;">
+      Name: {{ pokemon.name }}<br/>
+      Type: {{ pokemon.types|join:", " }}<br/><br/>
+      Abilities: {{ pokemon.abilities|join:", " }}<br/>
+      Stats:<br/><br/>
+      - HP: {{ pokemon.stats.hp }}<br/>
+      - Attack: {{ pokemon.stats.attack }}<br/>
+      - Defense: {{ pokemon.stats.defense }}<br/>
+      - Special Attack: {{ pokemon.stats.sp_attack }}<br/>
+      - Special Defense: {{ pokemon.stats.sp_defense }}<br/>
+      - Speed: {{ pokemon.stats.speed }}<br/>
+    </div>
+  {% elif pokemon.error %}
+    <div style="position: absolute; left: 50px; top: 180px; width: 300px; color: white; font-family: Courier Prime; font-size: 16px; text-align: center;">
+      {{ pokemon.error }}
+    </div>
+  {% else %}
+    <div style="position: absolute; left: 50px; top: 180px; width: 300px; color: white; font-family: Courier Prime; font-size: 16px; text-align: center;">
+      Search for a Pokémon!
+    </div>
+  {% endif %}
 
-    {% if pokemon %}
-        {% if pokemon.error %}
-            <p style="color:red;">{{ pokemon.error }}</p>
-        {% else %}
-            <div class="card">
-                <h2>{{ pokemon.name }}</h2>
-                <img src="{{ pokemon.image }}" alt="{{ pokemon.name }}">
-                <p><strong>Type:</strong> {{ pokemon.types|join:", " }}</p>
-                <p><strong>Abilities:</strong> {{ pokemon.abilities|join:", " }}</p>
-                <h4>Stats:</h4>
-                <ul>
-                    {% for stat, value in pokemon.stats.items %}
-                        <li><strong>{{ stat }}:</strong> {{ value }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-    {% endif %}
-</body>
-</html>
+  <div style="width: 56px; height: 56px; left: 44px; top: 421px; position: absolute; background: #D9D9D9; border-radius: 9999px; border: 1px #403636 solid"></div>
+  <div style="width: 119px; height: 31px; left: 252px; top: 433px; position: absolute; background: #342A2A; border-radius: 8px; border: 1px black solid"></div>
+  <div style="width: 31px; height: 111px; left: 296px; top: 393px; position: absolute; background: #342A2A; border-radius: 8px; border: 1px black solid"></div>
+
+  <!-- Green rectangle with search form inside -->
+  <div style="width: 150px; height: 45px; left: 125px; top: 504px; position: absolute; background: #259C55; border-radius: 2px; border: 1px #247038 solid; display: flex; align-items: center; padding: 0 8px; box-sizing: border-box;">
+    <form method="GET" action="" style="display: flex; width: 100%; height: 100%; align-items: center; gap: 6px;">
+      <input
+        type="text"
+        name="pokemon"
+        placeholder="Search..."
+        style="
+          flex-grow: 1;
+          height: 28px;
+          border: none;
+          border-radius: 4px;
+          padding: 0 8px;
+          font-size: 14px;
+          font-family: Roboto, sans-serif;
+          font-weight: 400;
+          outline: none;
+        "
+      />
+      <button
+        type="submit"
+        style="
+          height: 28px;
+          padding: 0 10px;
+          background: #1B7F3F;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          cursor: pointer;
+        "
+      >
+        Go
+      </button>
+    </form>
+  </div>
+</div>
