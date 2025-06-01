@@ -14,12 +14,12 @@
       Type: {{ pokemon.types|join:", " }}<br/><br/>
       Abilities: {{ pokemon.abilities|join:", " }}<br/>
       Stats:<br/><br/>
-      - HP: {{ pokemon.stats.hp }}<br/>
-      - Attack: {{ pokemon.stats.attack }}<br/>
-      - Defense: {{ pokemon.stats.defense }}<br/>
-      - Special Attack: {{ pokemon.stats.sp_attack }}<br/>
-      - Special Defense: {{ pokemon.stats.sp_defense }}<br/>
-      - Speed: {{ pokemon.stats.speed }}<br/>
+      - HP: {{ pokemon.hp}}<br/>
+      - Attack: {{ pokemon.attack }}<br/>
+      - Defense: {{ pokemon.defense }}<br/>
+      - Special Attack: {{ pokemon.special_attack }}<br/>
+      - Special Defense: {{ pokemon.special_defense }}<br/>
+      - Speed: {{ pokemon.speed }}<br/>
     </div>
   {% elif pokemon.error %}
     <div style="position: absolute; left: 50px; top: 180px; width: 300px; color: white; font-family: Courier Prime; font-size: 16px; text-align: center;">
